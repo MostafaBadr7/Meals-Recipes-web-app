@@ -1,0 +1,154 @@
+/*  
+* Route - Frontend
+* JS program Week 9
+* Weather Web APP 
+* JS + Bootstrap + Ajax + APIs
+* 23/12/2023
+* Weather page JS 
+*/
+
+/* Import other CSS files*/
+/* <!----------------------------- Bootstrap ----------------------------------> */
+@import url(/Assigns/6-Devolio/css-Bootstrap-Fontawesome/bootstrap.min.css);
+/* <!--------------------------- font awesome ---------------------------------> */
+@import url(/Assigns/6-Devolio/JS-Bootstrap-Fontawesome/all.min.js);
+
+/* Global */
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --color-hue: 0%;
+  --color-sat: 100%;
+  --color-light: 50%;
+  --main-color: #dc3545;
+  --sec-color: hsl(var(--color-hue), var(--color-sat), var(--color-light));
+}
+/* ................. You can change the main color from here .....................*/
+.custom-danger {
+  background-color: var(--main-color);
+}
+/* <!------------------------------ Meals ---------------------------- --> */
+.meal {
+  cursor: pointer;
+}
+.meal-layer {
+  transition: top ease-in-out 0.5s;
+}
+.meal:hover .meal-layer {
+  top: 0 !important;
+}
+/* <!------------------------------ Side bAR ---------------------------- --> */
+section {
+  opacity: 0.5;
+  min-height: 100vh !important;
+}
+.menu-nav {
+  width: 350px;
+}
+.burger-icon-div {
+  cursor: pointer;
+}
+.contact-input-div {
+  min-width: 150px;
+}
+.menu-item {
+  cursor: pointer;
+}
+.menu-nav {
+  transition: left 0.5s ease-in-out;
+}
+.active-section {
+  display: block !important;
+  opacity: 1 !important;
+  transition: opacity 0.2s ease-in-out;
+}
+/* <!------------------------------ Areas ---------------------------- --> */
+.Areas-icon {
+  font-size: 4rem !important;
+}
+/* <!------------------------------ Ingredient ---------------------------- --> */
+.Ingredient-icons {
+  font-size: 4rem !important;
+}
+/* <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --> */
+/* <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOADER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --> */
+.loader {
+  transform: rotateZ(45deg);
+  perspective: 1000px;
+  border-radius: 50%;
+  width: 198px;
+  height: 198px;
+  color: purple;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  transform: rotateX(70deg);
+  animation: 1s spin linear infinite;
+}
+.loader:after {
+  color: white !important;
+  transform: rotateY(70deg);
+  animation-delay: 0.4s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes rotateccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes spin {
+  0%,
+  100% {
+    box-shadow: 0.2em 0px 0 0px currentcolor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentcolor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0px currentcolor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentcolor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentcolor;
+  }
+  75% {
+    box-shadow: 0px -0.2em 0 0 currentcolor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentcolor;
+  }
+}
+.loading-layer {
+  background-color: #000;
+}

@@ -1,0 +1,291 @@
+<!--  
+* Route - Frontend
+* JS program Exam
+* Meals Web APP 
+* JS + Bootstrap + Ajax + APIs + Regex + Jquery
+* 26/01/2024
+* Meals page JS 
+* Mostafa Badr >> LinkedIn: https://www.linkedin.com/in/mostafa-badr-610b64208
+* Mostafa Badr >> GitHub: https://github.com/MostafaBadr7 
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yummy</title>
+    
+    <!--------------------------- Animate.css --------------------------------->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!--------------------------- font awesome --------------------------------->
+    <link rel="stylesheet" href="./CSS/all.min.css" />
+    <!----------------------------- Bootstrap ---------------------------------->
+    <link
+      rel="stylesheet"
+      href="./CSS/bootstrap.min.css"
+    />
+    <!-- One External stylesheet includes import function of others css files -->
+    <link rel="stylesheet" href="./CSS/index.css" />
+    <link rel="stylesheet" href="./CSS/media.css" />
+  </head>
+  <body class="position-relative ">
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Loading Layer >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section class="loading-layer d-none  position-fixed top-0 start-0 end-0 bottom-0 opacity-75 z-3 d-flex justify-content-center align-items-center vh-100">
+      <div class="loader m-auto"></div>
+    </section>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Search >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section
+      class="search  Search animate__animated animate__fadeIn  d-none position-absolute top-0 start-0 end-0  bg-dark active-section "
+    >
+      <div class="container mt-5">
+        <div class="row gy-3">
+          <div class="col-md col-sm-12">
+            <input
+              type="text"
+              class="search-name form-control p-2"
+              placeholder="Search By Name"
+              aria-label="First name"
+            />
+          </div>
+          <div class="col-md col-sm-12">
+            <input
+              type="text"
+              class="search-letter  form-control p-2"
+              placeholder="Search By First Letter"
+              aria-label="Last name"
+            />
+          </div>
+        </div>
+        <div class="search-show-div row g-3 pb-5 mt-5">
+          <div class="meal col-md-3 col-sm-12 overflow-hidden">
+            <div class="overflow-hidden p-0 position-relative rounded-4">
+              <img
+                class="w-100 img-fluid position-relative"
+                src="../Games website - OOP/Images/carl-raw-m3hn2Kn5Bns-unsplash.jpg"
+                alt=""
+              />
+              <div
+                class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75"
+              >
+                <p>Lorem ipsum dolor sit amet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </section>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Categories >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section
+      class="categories opacity-0 animate__animated animate__fadeIn Categories d-none  position-absolute top-0 start-0 end-0 bg-dark"
+    >
+      <main class="container mt-5">
+        <div class="categories-show-div row g-3 pb-5">
+          <div class="meal col-md-3 col-sm-12 overflow-hidden">
+            <div class="overflow-hidden p-0 position-relative rounded-4">
+              <img
+                class="w-100 img-fluid position-relative"
+                src="../Games website - OOP/Images/carl-raw-m3hn2Kn5Bns-unsplash.jpg"
+                alt=""
+              />
+              <div
+                class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75"
+              >
+                <p>Lorem ipsum dolor sit amet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Area >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section
+      class="Areas Area animate__animated animate__fadeIn d-none  position-absolute top-0 start-0 end-0  bg-dark"
+    >
+      <main class="container mt-5">
+        <div class="area-show-div row m-auto">
+          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
+            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
+            <h2>lorem.</h2>
+          </div>
+          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
+            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
+            <h2>lorem.</h2>
+          </div>
+          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
+            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
+            <h2>lorem.</h2>
+          </div>
+          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
+            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
+            <h2>lorem.</h2>
+          </div>
+          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
+            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
+            <h2>lorem.</h2>
+          </div>
+          
+       
+      </main>
+    </section>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Ingredients >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section
+      class="Ingredients d-none animate__animated animate__fadeIn position-absolute top-0 start-0 end-0  bg-dark"
+    >
+      <main class="container mt-5">
+        <div class="ingredients-show-div row align-items-stretch">
+          <div class="col-md-3 col-sm-12 text-white text-center align-items-stretch d-flex flex-column justify-content-between">
+            <i class="Ingredient-icons fa-solid fa-drumstick-bite text-white mb-sm-4"></i>
+            <h2>Lorem.</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est,
+              tempore.
+            </p>
+          </div>
+        </div>
+      </main>
+    </section>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< contact-us >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section
+      class="contact-us d-none animate__animated animate__fadeIn  position-absolute top-0 start-0 end-0 bottom-0 bg-dark d-flex align-items-center justify-content-center"
+    >
+      <div class="container mt-5 ">
+        <div class="row g-3  px-5 mx-5 ">
+            <div class="contact-input-div name col-md-6 col-sm-12">
+              <input
+                type="text"
+                class="name-input form-control p-1"
+                placeholder="Enter Your Name"
+                aria-label="First name"
+              />
+              <div class="name-msg bg-danger bg-success rounded-4 py-3 animate__animated  text-center">Hi</div>
+            </div>
+            <div class="contact-input-div email col-md-6 col-sm-12">
+              <input
+                type="email"
+                class="email-input form-control p-1"
+                placeholder="Enter Your Email"
+                aria-label="First name"
+              />
+              <div class="email-msg bg-danger bg-success rounded-4 py-3 animate__animated  text-center">Hi</div>
+            </div>
+            <div class="contact-input-div phone col-md-6 col-sm-12">
+              <input
+                type="number"
+                class="phone-input form-control p-1"
+                placeholder="Enter Your Phone"
+                aria-label="First name"
+              />
+              <div class="phone-msg bg-danger bg-success rounded-4 py-3 animate__animated  text-center">Hi</div>
+            </div>
+            <div class="contact-input-div age col-md-6 col-sm-12">
+              <input
+                type="number"
+                class="age-input form-control p-1"
+                placeholder="Enter Your Age"
+                aria-label="Last name"
+              />
+              <div class="age-msg bg-danger bg-success rounded-4 py-3 animate__animated  text-center">Hi</div>
+            </div>
+            <div class="contact-input-div pass col-md-6 col-sm-12">
+              <input
+                type="password"
+                class="pass-input form-control p-1"
+                placeholder="Enter Your Password"
+                aria-label="First name"
+              />
+              <div class="pass-msg bg-danger bg-success rounded-4 py-3 animate__animated  text-center">Hi</div>
+            </div>
+            <div class="contact-input-div Repass col-md-6 col-sm-12">
+              <input
+                type="password"
+                class="rePass-input form-control p-1"
+                placeholder="Repassword"
+                aria-label="Last name"
+              />
+              <div class="rePass-msg bg-danger bg-success rounded-4 py-3 animate__animated  text-center">Hi</div>
+            </div>
+            <div class="contact-input-div w-100  d-flex justify-content-center">
+              <button class="submit-btn btn btn-outline-danger disabled">Submit</button>
+            </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Meal Details Layer >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <section class="d-none animate__animated animate__fadeIn " >
+      <main>
+        <div class="details-layer pt-3 top-0 start-0 end-0 pb-5 bg-danger position-absolute   ">
+                  <!---------------------------------- X button --------------------------------->
+          <div class="x-icon "><button type="button" class="btn-close close-details-btn ms-4" aria-label="Close"></button>
+          </div>
+                        <!-------------------------- Details Figure --------------------------------->
+          <div class="row m-auto mt-5">
+          <figure class="col-4  m-auto mb-5 ">
+            <div>
+              
+            </div>
+          </figure>
+          <figcaption class="game-info-details-layers col-8 pe-4">
+            <h1>Instructions
+            </h1>
+            <p>The legacy of Phantasy Star Online 2 continues a thousand years later, as the next generation of ARKS operatives join forces with a race known as the Meteorn on the planet Halpha to defend against a new threat, The Dolls. Phantasy Star Online 2: New Genesis is an open world online RPG featuring a day-night cycles, weather effects, and a revamped battle system. It also introduces ways to travel no in the previous game, including gliding. All of this is built on a new graphics engine. Despite its differences from PSO2, the games are still connected, with players being able to move back and forth via the client. Players of the original can even bring characters already created in the original game, as well as certain items into New Genesis. For those who played the original game, New Genesis will be familiar in a lot of ways. The games have similar interfaces, quest types and other features. They both also share the same class types, and as with the original game, players will use Mags in combat. Players just entering the Phantasy Star Online 2 universe through New Genesis will also be able to take advantage of its relationship with the original game. The games share the same client and players can move between them and even collect gear from the original game to use in NGS.</p>
+
+            <div class="d-flex flex-column justify-content-between">
+              <h4 class="my-2">Area:</h4>
+              <h4 class="mb-2">Category:</h4>
+              <h4 class="mb-2">Recipes:</h4>
+            </div>
+            <button class="btn btn-danger mt-3"><a class="text-white text-decoration-none" href="">Website</a></button>
+          </figcaption>
+          </div>
+      </div>
+      </main>
+    </section>
+        <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Side Bar >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <nav class="menu-nav   position-fixed  top-0 bottom-0 ">
+      <main class="row  h-100  container">
+        <div class="menu-items-div col-10  py-3 ps-5 bg-dark d-flex flex-column text-white justify-content-between ">
+          <ul class="menu-ul animate__animated  d-flex list-unstyled text-white flex-column justify-content-between ">
+            <li data-pageName="Search" class="menu-item mb-3 ">Search</li>
+            <li data-pageName="Categories" class="menu-item mb-3">Categories</li>
+            <li data-pageName="Area" class="menu-item mb-3">Area</li>
+            <li data-pageName="Ingredients" class="menu-item mb-3">Ingredients</li>
+            <li data-pageName="contact-us" class="menu-item mb-3">Contact Us</li>
+          </ul>
+          <div>
+            <div class="d-flex">
+              <div  class="me-1">
+                <i class="fa-brands fa-facebook"></i>
+              </div>
+              <div class="me-1">
+                <i class="fa-brands fa-twitter"></i>
+              </div>
+              <div class="me-1">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+            </div>
+            <p>Copyright Â© 2019 All Rights
+              Reserved.</p>
+          </div>
+        </div>
+        <div class="col-2 py-3 bg-white d-flex flex-column justify-content-between align-items-center">
+          <div class="">
+            <i class="fa-solid fa-face-grin-hearts bg-danger text-white rounded-5 fs-1"></i>
+          </div>
+          <div class="burger-icon-div">
+            <i class="burger-icon fa-solid fa-xmark fs-1"></i>
+          </div>
+          <div class=" d-flex flex-column">
+            <i class="fa-solid fa-globe"></i>
+            <i class="fa-solid fa-share-nodes"></i>
+          </div>
+        </div>
+      </main>
+    </nav>
+      
+        <!------------------------------ JS FILES---------------------------- -->
+    <script src="./JS/jquery-3.7.1.min.js"></script>
+    <script src="./JS/all.min.js"></script>
+    <script src="./JS/bootstrap.min.js"></script>
+    <script src="./JS/index.js"></script>
+  </body>
+</html>
