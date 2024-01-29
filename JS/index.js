@@ -12,8 +12,8 @@ let phoneInput = $(".phone-input");
 let nameInput = $(".name-input");
 let searchName = $(".search-name");
 let searchletter = $(".search-letter");
-
-//.................................. Side Bar..............................
+let searchShowDiv = $(".search-show-div");
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Side Bar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 $(".burger-icon-div").click(() => {
   $(".burger-icon").toggleClass("fa-xmark");
   $(".burger-icon").toggleClass("fa-bars");
@@ -29,16 +29,17 @@ $(".burger-icon-div").click(() => {
     $(".menu-ul").toggleClass("animate__fadeInUp");
   }, 1000);
 });
-
-// Change page when press page name
+//................................ Change page when press page name ....................
 $(".menu-item").click(function () {
   $(".active-section").toggleClass("active-section");
   let click = $(this).attr("data-pageName");
   $(`.${click}`).toggleClass("active-section");
+  // show search bar and empty search result area because I use search page for show
+  $(".search-div-row").removeClass("d-none");
+  searchShowDiv.html(``);
 });
-
-//.................................. Contact US..............................
-//Email Validation
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Contact US <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
+//.................................. Email Validation ..............................
 $(".email-msg").hide(1);
 emailInput.keyup(function (e) {
   let flag = false;
@@ -58,8 +59,7 @@ emailInput.blur(function (e) {
   e.preventDefault();
   $(".email-msg").slideUp();
 });
-
-//name Validation
+//................................ name Validation ....................
 $(".name-msg").hide(1);
 nameInput.keyup(function (e) {
   let flag = false;
@@ -78,8 +78,7 @@ nameInput.blur(function (e) {
   e.preventDefault();
   $(".name-msg").slideUp();
 });
-
-//phone Validation
+//................................ phone Validation ....................
 $(".phone-msg").hide(1);
 phoneInput.keyup(function (e) {
   let flag = false;
@@ -98,8 +97,7 @@ phoneInput.blur(function (e) {
   e.preventDefault();
   $(".phone-msg").slideUp();
 });
-
-//age Validation
+//................................ age Validation ....................
 $(".age-msg").hide(1);
 ageInput.keyup(function (e) {
   let flag = false;
@@ -119,9 +117,7 @@ ageInput.blur(function (e) {
   e.preventDefault();
   $(".age-msg").slideUp();
 });
-
-//pass Validation
-
+//................................ pass Validation ....................
 $(".pass-msg").hide(1);
 
 passInput.keyup(function (e) {
@@ -140,8 +136,7 @@ passInput.blur(function (e) {
   e.preventDefault();
   $(".pass-msg").slideUp();
 });
-
-//rePass Validation
+//................................ rePass Validation ....................
 $(".rePass-msg").hide(1);
 rePassInput.keyup(function (e) {
   $(".rePass-msg").slideDown();
@@ -159,7 +154,6 @@ rePassInput.blur(function (e) {
   e.preventDefault();
   $(".rePass-msg").slideUp();
 });
-
 setInterval(() => {
   if (
     phoneRegex.test(phoneInput.val()) == true &&
@@ -175,17 +169,20 @@ setInterval(() => {
   }
 }, 500);
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Categories <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-let catShowDiv = $(".categories-show-div");
-let catbox = ``;
 async function mealCategoriesFetch() {
+  let catShowDiv = $(".categories-show-div");
+  let catbox = ``;
+  // if ($(".categories").hasClass("active-section")) {
+  console.log($(".search").hasClass("active-section"));
   const catApiConn = await fetch(
     "https://www.themealdb.com/api/json/v1/1/categories.php"
   );
   const apiResponse = await catApiConn.json();
   const { categories } = apiResponse;
+  $(".loading-layer").addClass("d-none");
   for (let i = 0; i < categories.length; i++) {
     catbox += `
-  <div id="${categories[i].idCategory}" class="meal col-md-3 col-sm-12 overflow-hidden">
+  <div id="${categories[i].strCategory}" class="meal cats col-md-3 col-sm-12 overflow-hidden">
             <div class="overflow-hidden p-0 position-relative rounded-4">
               <img
                 class="w-100 img-fluid position-relative"
@@ -193,52 +190,57 @@ async function mealCategoriesFetch() {
                 alt=""
               />
               <div
-                class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75 text-center"
+                class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75 text-center "
               >
-              <h4>${categories[i].strCategory}</h4>
-                <p>${categories[i].strCategoryDescription}</p>
+              <h4 id="${categories[i].strCategory}">${categories[i].strCategory}</h4>
+                <p class="">${categories[i].strCategoryDescription}</p>
               </div>
             </div>
           </div>
   `;
   }
   catShowDiv.html(catbox);
+  displayDetailsOfDetails(
+    ".cats",
+    "https://www.themealdb.com/api/json/v1/1/filter.php?c="
+  );
 }
 mealCategoriesFetch();
+
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Areas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-let areaShowDiv = $(".area-show-div");
-let areabox = ``;
 async function areaMealsFetch() {
-  const areaApiConn = await fetch(
+  let areaShowDiv = $(".area-show-div");
+  let areabox = ``;
+  let meals = await searchMealsFetch(
     "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
   );
-  const apiResponse = await areaApiConn.json();
-  const { meals } = apiResponse;
   for (let i = 0; i < meals.length; i++) {
     areabox += `
-    <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
+    <div id="${meals[i].strArea}" class="areas-divs col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
     <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
     <h2>${meals[i].strArea}</h2>
   </div>
   `;
   }
   areaShowDiv.html(areabox);
+  displayDetailsOfDetails(
+    ".areas-divs",
+    "https://www.themealdb.com/api/json/v1/1/filter.php?a="
+  );
 }
 areaMealsFetch();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ingredients <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-let ingredientsShowDiv = $(".ingredients-show-div");
-let ingredientsbox = ``;
 async function ingredientsMealsFetch() {
-  const ingredientsApiConn = await fetch(
+  let ingredientsShowDiv = $(".ingredients-show-div");
+  let ingredientsbox = ``;
+  let meals = await searchMealsFetch(
     "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
   );
-  const apiResponse = await ingredientsApiConn.json();
-  const { meals } = apiResponse;
   for (let i = 0; i < 200; i++) {
     ingredientsbox += `
     <div id="${
-      meals[i].idIngredient
-    }" class="col-md-3 col-sm-12 text-white text-center align-items-stretch ">
+      meals[i].strIngredient
+    }" class="ingredients-divs col-md-3 col-sm-12 text-white text-center align-items-stretch ">
     <i class="Ingredient-icons fa-solid fa-drumstick-bite text-white mb-sm-4"></i>
     <div class="d-flex flex-column justify-content-between">
       <div>
@@ -258,56 +260,189 @@ async function ingredientsMealsFetch() {
   `;
   }
   ingredientsShowDiv.html(ingredientsbox);
+
+  displayDetailsOfDetails(
+    ".ingredients-divs",
+    "https://www.themealdb.com/api/json/v1/1/filter.php?i="
+  );
 }
 ingredientsMealsFetch();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Search <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-let searchShowDiv = $(".search-show-div");
 let searchbox = ``;
-searchName.keyup(function (e) {
+let mealId;
+let sercahedMeals;
+//................................ Search by Name ....................
+searchName.keyup(async function (e) {
   searchbox = ``;
+  let apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchName.val()}`;
   console.log("hiiiiiii");
-  async function searchMealsFetch() {
-    const searchApiConn = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchName.val()}`
-    );
-    const apiResponse = await searchApiConn.json();
-    const { meals } = apiResponse;
-    console.log(meals);
-    meals ? displayResults() : console.log(meals);
 
-    function displayResults() {
-      searchbox = ``;
-      for (let i = 0; i < meals.length; i++) {
-        searchbox += `
-      <div id="${meals[i].idMeal}" class="meal col-md-3 col-sm-12 overflow-hidden">
-      <div class="overflow-hidden p-0 position-relative rounded-4">
-        <img
-          class="w-100 img-fluid position-relative"
-          src="${meals[i].strMealThumb}"
-          alt=""
-        />
-        <div
-          class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75 text-center"
-        >
-        <h4>${meals[i].strMeal}</h4>
-        </div>
-      </div>
-    </div>
-  `;
-      }
-    }
-    // console.log(searchbox);
-    searchShowDiv.html(searchbox);
-  }
-  searchMealsFetch();
+  (await searchMealsFetch(apiUrl))
+    ? displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
+    : console.log(await searchMealsFetch(apiUrl));
+
+  searchShowDiv.html(
+    displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
+  );
+  sercahedMeals = $(".meal");
+  console.log(sercahedMeals);
+
+  sercahedMeals.click(async function () {
+    mealId = this.id;
+    displayDetais(await connectDetailsApi(mealId));
+    $(".Recipes").html(fillDetailsIngredients(await connectDetailsApi(mealId)));
+    showDetailsLayer();
+  });
 });
+//................................ Search by letter ....................
+searchletter.keyup(async function (e) {
+  searchbox = ``;
+  let apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchletter.val()}`;
+  console.log("hiiiiiii");
 
-//................................ To show validation msg t user ....................
-function alertMsg(msg) {
-  warningBoxMsg.innerHTML = msg;
-  warningBox.classList.add("display");
-  setTimeout(() => {
-    warningBox.classList.remove("display");
-    warningBoxMsg.innerHTML = "";
-  }, "3000");
+  (await searchMealsFetch(apiUrl))
+    ? displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
+    : console.log(await searchMealsFetch(apiUrl));
+
+  searchShowDiv.html(
+    displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
+  );
+  sercahedMeals = $(".meal");
+  console.log(sercahedMeals);
+
+  sercahedMeals.click(async function () {
+    mealId = this.id;
+    displayDetais(await connectDetailsApi(mealId));
+    $(".Recipes").html(fillDetailsIngredients(await connectDetailsApi(mealId)));
+    showDetailsLayer();
+  });
+});
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> automation functions <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
+async function searchMealsFetch(apiUrl) {
+  $(".loading-layer").removeClass("d-none");
+  const searchApiConn = await fetch(apiUrl);
+  const apiResponse = await searchApiConn.json();
+  const { meals } = apiResponse;
+  $(".loading-layer").addClass("d-none");
+  return meals;
+}
+function displaySearchResults(apiResp, displayBox) {
+  displayBox = ``;
+  for (let i = 0; i < apiResp.length; i++) {
+    displayBox += `
+  <div id="${apiResp[i].idMeal}" class="meal col-md-3 col-sm-12 overflow-hidden">
+  <div class="overflow-hidden p-0 position-relative rounded-4">
+    <img
+      class="w-100 img-fluid position-relative"
+      src="${apiResp[i].strMealThumb}"
+      alt=""
+    />
+    <div
+      class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75 text-center"
+    >
+    <h4>${apiResp[i].strMeal}</h4>
+    </div>
+  </div>
+</div>
+`;
+  }
+  return displayBox;
+}
+function fillDetailsIngredients(apiResp) {
+  let recipeIngredients = ``;
+
+  for (let i = 1; i < 21; i++) {
+    let recipe = `strIngredient${i}`;
+    if (apiResp[recipe] != "" && apiResp[recipe] != null) {
+      recipeIngredients += `
+          <span class="p-2 rounded bg-info mt-2 d-inline-block">${apiResp[recipe]}</span>
+          `;
+    }
+  }
+  return recipeIngredients;
+}
+function showDetailsLayer() {
+  $(".active-section").removeClass("active-section");
+  $(".details-section").toggleClass("active-section");
+  $(".close-details-btn").click(() => {
+    $(".details-section").removeClass("active-section");
+    $(".Search").addClass("active-section");
+  });
+}
+function displayDetais(apiResp) {
+  $(".details-show-div").html(`
+  <figure id="${apiResp.idMeal}" class="col-4   mb-5 ">
+        <div class="text-center d-flex flex-column justify-content-start align-items-center ">
+          <img class="w-100 img-fluid" src="${apiResp.strMealThumb}" alt="">
+          <h1>${apiResp.strMeal}</h1>
+        </div>
+      </figure>
+      <figcaption class=" col-8 pe-4">
+        <h1>Instructions
+        </h1>
+        <p>${apiResp.strInstructions}</p>
+        <div class="d-flex flex-column justify-content-between mb-5">
+          <h4 class="my-2">Area: ${apiResp.strArea}</h4>
+          <h4 class="mb-2">Category: ${apiResp.strCategory}</h4>
+          <h4 class="mb-2">Recipes:</h4>
+          <p class="Recipes text-dark "></p>
+        </div>
+        <h4 >Tags:</h4>
+        <a class="fw-bolder text-decoration-none btn btn-success mt-3" href="${apiResp.strSource}" target="_blank">Source</a>
+        <a class=" fw-bolder text-decoration-none btn btn-success mt-3 " href="${apiResp.strYoutube}" target="_blank"><li class="fa-brands fa-youtube me-1 text-danger"></li>Youtube</a>
+      </figcaption>
+  `);
+}
+async function connectDetailsApi(id) {
+  $(".loading-layer").removeClass("d-none");
+
+  const mealDeatilsApiConn = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+  );
+  const apiDetailsResponse = await mealDeatilsApiConn.json();
+  const { meals } = apiDetailsResponse;
+  $(".loading-layer").addClass("d-none");
+
+  return meals[0];
+}
+function displayDetailsOfDetails(currentDiv, apiBase) {
+  let showedMeals = $(`${currentDiv}`);
+
+  showedMeals.click(async function () {
+    let ingredientsBoxChoice = ``;
+    let ingredientsName = this.id;
+    console.log(ingredientsName);
+    let apiUrl = `${apiBase}${ingredientsName}`;
+    displaySearchResults(await searchMealsFetch(apiUrl), ingredientsBoxChoice);
+    searchShowDiv.html(
+      displaySearchResults(await searchMealsFetch(apiUrl), ingredientsBoxChoice)
+    );
+    $(".active-section").removeClass("active-section");
+    $(".Search").addClass("active-section");
+    $(".search-div-row").addClass("d-none");
+
+    let sercahedMeals = $(".meal");
+    console.log(sercahedMeals);
+
+    sercahedMeals.click(async function () {
+      mealId = this.id;
+      displayDetais(await connectDetailsApi(mealId));
+      $(".Recipes").html(
+        fillDetailsIngredients(await connectDetailsApi(mealId))
+      );
+      showDetailsLayer();
+    });
+  });
+}
+function displayLoading(currentSectionClass, showBox) {
+  setInterval(() => {
+    if (
+      showBox == `` &&
+      $(currentSectionClass).hasClass("active-section") == true
+    ) {
+      $(".loading-layer").removeClass("d-none");
+    } else {
+      $(".loading-layer").addClass("d-none");
+    }
+  }, 500);
 }

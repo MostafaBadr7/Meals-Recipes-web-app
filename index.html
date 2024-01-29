@@ -13,7 +13,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yummy</title>
-    
     <!--------------------------- Animate.css --------------------------------->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!--------------------------- font awesome --------------------------------->
@@ -30,15 +29,15 @@
   <body class="position-relative ">
         <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Loading Layer >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
     <section class="loading-layer d-none  position-fixed top-0 start-0 end-0 bottom-0 opacity-75 z-3 d-flex justify-content-center align-items-center vh-100">
-      <div class="loader m-auto"></div>
+      <div class="lds-dual-ring"></div>
     </section>
         <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Search >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
     <section
       class="search  Search animate__animated animate__fadeIn  d-none position-absolute top-0 start-0 end-0  bg-dark active-section "
     >
       <div class="container mt-5">
-        <div class="row gy-3">
-          <div class="col-md col-sm-12">
+        <div class="search-div-row row gy-3">
+          <div class=" col-md col-sm-12">
             <input
               type="text"
               class="search-name form-control p-2"
@@ -56,20 +55,6 @@
           </div>
         </div>
         <div class="search-show-div row g-3 pb-5 mt-5">
-          <div class="meal col-md-3 col-sm-12 overflow-hidden">
-            <div class="overflow-hidden p-0 position-relative rounded-4">
-              <img
-                class="w-100 img-fluid position-relative"
-                src="../Games website - OOP/Images/carl-raw-m3hn2Kn5Bns-unsplash.jpg"
-                alt=""
-              />
-              <div
-                class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75"
-              >
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
-          </div>
         </div>
     </div>
     </section>
@@ -79,20 +64,6 @@
     >
       <main class="container mt-5">
         <div class="categories-show-div row g-3 pb-5">
-          <div class="meal col-md-3 col-sm-12 overflow-hidden">
-            <div class="overflow-hidden p-0 position-relative rounded-4">
-              <img
-                class="w-100 img-fluid position-relative"
-                src="../Games website - OOP/Images/carl-raw-m3hn2Kn5Bns-unsplash.jpg"
-                alt=""
-              />
-              <div
-                class="meal-layer position-absolute top-100 w-100 h-100 bg-white opacity-75"
-              >
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     </section>
@@ -102,28 +73,6 @@
     >
       <main class="container mt-5">
         <div class="area-show-div row m-auto">
-          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
-            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
-            <h2>lorem.</h2>
-          </div>
-          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
-            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
-            <h2>lorem.</h2>
-          </div>
-          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
-            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
-            <h2>lorem.</h2>
-          </div>
-          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
-            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
-            <h2>lorem.</h2>
-          </div>
-          <div class="col-md-3 col-sm-12 text-white text-center text-capitalize mb-sm-4">
-            <i class="Areas-icon fa-solid fa-house-laptop  w-100 fs-1"></i>
-            <h2>lorem.</h2>
-          </div>
-          
-       
       </main>
     </section>
         <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Ingredients >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
@@ -132,14 +81,6 @@
     >
       <main class="container mt-5">
         <div class="ingredients-show-div row align-items-stretch">
-          <div class="col-md-3 col-sm-12 text-white text-center align-items-stretch d-flex flex-column justify-content-between">
-            <i class="Ingredient-icons fa-solid fa-drumstick-bite text-white mb-sm-4"></i>
-            <h2>Lorem.</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est,
-              tempore.
-            </p>
-          </div>
         </div>
       </main>
     </section>
@@ -211,29 +152,31 @@
       </div>
     </section>
     <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Meal Details Layer >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
-    <section class="d-none animate__animated animate__fadeIn " >
-      <main>
-        <div class="details-layer pt-3 top-0 start-0 end-0 pb-5 bg-danger position-absolute   ">
+    <section class="details-section d-none  animate__animated animate__fadeIn pt-3 top-0 start-0 end-0  pb-5  position-absolute bg-danger" >
+      <main class="container ">
+        <div class="details-layer   ">
                   <!---------------------------------- X button --------------------------------->
           <div class="x-icon "><button type="button" class="btn-close close-details-btn ms-4" aria-label="Close"></button>
           </div>
                         <!-------------------------- Details Figure --------------------------------->
-          <div class="row m-auto mt-5">
-          <figure class="col-4  m-auto mb-5 ">
-            <div>
-              
+          <div class=" details-show-div row  mt-5">
+          <figure class="col-4 ">
+            <div class="text-center">
+              <img class="w-100 img-fluid" src="" alt="">
+              <h1>img</h1>
             </div>
           </figure>
           <figcaption class="game-info-details-layers col-8 pe-4">
             <h1>Instructions
             </h1>
             <p>The legacy of Phantasy Star Online 2 continues a thousand years later, as the next generation of ARKS operatives join forces with a race known as the Meteorn on the planet Halpha to defend against a new threat, The Dolls. Phantasy Star Online 2: New Genesis is an open world online RPG featuring a day-night cycles, weather effects, and a revamped battle system. It also introduces ways to travel no in the previous game, including gliding. All of this is built on a new graphics engine. Despite its differences from PSO2, the games are still connected, with players being able to move back and forth via the client. Players of the original can even bring characters already created in the original game, as well as certain items into New Genesis. For those who played the original game, New Genesis will be familiar in a lot of ways. The games have similar interfaces, quest types and other features. They both also share the same class types, and as with the original game, players will use Mags in combat. Players just entering the Phantasy Star Online 2 universe through New Genesis will also be able to take advantage of its relationship with the original game. The games share the same client and players can move between them and even collect gear from the original game to use in NGS.</p>
-
-            <div class="d-flex flex-column justify-content-between">
+            <div class="d-flex flex-column justify-content-between mb-5">
               <h4 class="my-2">Area:</h4>
               <h4 class="mb-2">Category:</h4>
               <h4 class="mb-2">Recipes:</h4>
             </div>
+            <h4 >Tags:</h4>
+            <button class="btn btn-danger mt-3"><a class="text-white text-decoration-none" href="">Website</a></button>
             <button class="btn btn-danger mt-3"><a class="text-white text-decoration-none" href="">Website</a></button>
           </figcaption>
           </div>
@@ -281,7 +224,6 @@
         </div>
       </main>
     </nav>
-      
         <!------------------------------ JS FILES---------------------------- -->
     <script src="./JS/jquery-3.7.1.min.js"></script>
     <script src="./JS/all.min.js"></script>
