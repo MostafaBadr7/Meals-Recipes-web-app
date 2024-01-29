@@ -1,18 +1,49 @@
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Media 1 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 @media screen and (max-width: 768px) {
-  /*............................. Validation MSG ..............................*/
   .loader {
     width: 98px !important;
     height: 98px !important;
   }
+  .meal {
+    width: 60% !important;
+    margin: 0 auto 10px !important;
+  }
+  .details-show-div {
+    margin: 0 !important;
+  }
+  .meal-layer p {
+    font-size: 15px !important ;
+  }
+  .x-icon {
+    margin: 0 0 20px !important;
+  }
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Media 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
-@media screen and (max-width: 400px) {
-  /*............................. Validation MSG ..............................*/
+@media screen and (max-width: 570px) {
+  .search-div-row {
+    width: 60% !important;
+    margin: auto !important;
+    font-size: 5px !important;
+  }
+  .Search {
+    font-size: 10px !important;
+  }
+  .details-show-div,
+  .ingredients-divs {
+    width: 75% !important;
+    margin: auto !important;
+  }
+  .x-icon {
+    margin: 0 0 20px !important;
+    margin-left: auto !important;
+    width: 10%;
+  }
+  .btn-close {
+    margin: 0 0 0 20px !important;
+  }
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Media 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 @media screen and (max-width: 290px) {
-  /* --------------------------- Welcome page logout button --------------------------------------- */
 }

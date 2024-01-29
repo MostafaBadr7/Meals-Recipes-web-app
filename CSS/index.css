@@ -22,6 +22,9 @@
 .meal:hover .meal-layer {
   top: 0 !important;
 }
+.meal-layer p {
+  font-size: 10px !important ;
+}
 /* <!------------------------------ Side bAR ---------------------------- --> */
 section {
   opacity: 0.5;

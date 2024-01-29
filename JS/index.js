@@ -179,10 +179,9 @@ async function mealCategoriesFetch() {
   );
   const apiResponse = await catApiConn.json();
   const { categories } = apiResponse;
-  $(".loading-layer").addClass("d-none");
   for (let i = 0; i < categories.length; i++) {
     catbox += `
-  <div id="${categories[i].strCategory}" class="meal cats col-md-3 col-sm-12 overflow-hidden">
+  <div id="${categories[i].strCategory}" class="meal cats col-md-3 col-sm-8 m-sm-auto m-md-0  overflow-hidden">
             <div class="overflow-hidden p-0 position-relative rounded-4">
               <img
                 class="w-100 img-fluid position-relative"
@@ -240,7 +239,7 @@ async function ingredientsMealsFetch() {
     ingredientsbox += `
     <div id="${
       meals[i].strIngredient
-    }" class="ingredients-divs col-md-3 col-sm-12 text-white text-center align-items-stretch ">
+    }" class="ingredients-divs col-md-3 col-sm-10 m-sm-auto m-md-0 text-white text-center align-items-stretch ">
     <i class="Ingredient-icons fa-solid fa-drumstick-bite text-white mb-sm-4"></i>
     <div class="d-flex flex-column justify-content-between">
       <div>
@@ -371,13 +370,13 @@ function showDetailsLayer() {
 }
 function displayDetais(apiResp) {
   $(".details-show-div").html(`
-  <figure id="${apiResp.idMeal}" class="col-4   mb-5 ">
+  <figure id="${apiResp.idMeal}" class="col-lg-4 col-md-10 m-lg-0 m-md-auto    mb-lg-5 ">
         <div class="text-center d-flex flex-column justify-content-start align-items-center ">
-          <img class="w-100 img-fluid" src="${apiResp.strMealThumb}" alt="">
+          <img class="w-100 img-fluid mb-md-2" src="${apiResp.strMealThumb}" alt="">
           <h1>${apiResp.strMeal}</h1>
         </div>
       </figure>
-      <figcaption class=" col-8 pe-4">
+      <figcaption class=" col-lg-8 col-md-10 pe-4 m-md-auto">
         <h1>Instructions
         </h1>
         <p>${apiResp.strInstructions}</p>
