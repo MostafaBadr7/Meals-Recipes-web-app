@@ -12,17 +12,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-:root {
-  --color-hue: 0%;
-  --color-sat: 100%;
-  --color-light: 50%;
-  --main-color: #dc3545;
-  --sec-color: hsl(var(--color-hue), var(--color-sat), var(--color-light));
-}
-/* ................. You can change the main color from here .....................*/
-.custom-danger {
-  background-color: var(--main-color);
-}
 /* <!------------------------------ Meals ---------------------------- --> */
 .meal {
   cursor: pointer;
@@ -70,7 +59,6 @@ section {
 .Ingredient-icons {
   font-size: 4rem !important;
 }
-/* <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> search <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --> */
 /* <!-->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOADER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< --> */
 .lds-dual-ring {
   display: inline-block;
