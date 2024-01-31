@@ -34,6 +34,19 @@ $(".menu-item").click(function () {
   $(".active-section").toggleClass("active-section");
   let click = $(this).attr("data-pageName");
   $(`.${click}`).toggleClass("active-section");
+  switch (click) {
+    case "Ingredients":
+      Ingredients();
+      break;
+    case "Area":
+      Areas();
+      break;
+    case "Categories":
+      Categories();
+      break;
+    default:
+      break;
+  }
   // show search bar and empty search result area because I use search page for show
   $(".search-div-row").removeClass("d-none");
   searchShowDiv.html(``);
@@ -169,11 +182,11 @@ setInterval(() => {
   }
 }, 500);
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Categories <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-async function mealCategoriesFetch() {
+async function Categories() {
+  $(".loading-layer").removeClass("d-none");
+
   let catShowDiv = $(".categories-show-div");
   let catbox = ``;
-  // if ($(".categories").hasClass("active-section")) {
-  console.log($(".search").hasClass("active-section"));
   const catApiConn = await fetch(
     "https://www.themealdb.com/api/json/v1/1/categories.php"
   );
@@ -199,15 +212,15 @@ async function mealCategoriesFetch() {
   `;
   }
   catShowDiv.html(catbox);
+  $(".loading-layer").addClass("d-none");
   displayDetailsOfDetails(
     ".cats",
     "https://www.themealdb.com/api/json/v1/1/filter.php?c="
   );
 }
-mealCategoriesFetch();
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Areas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-async function areaMealsFetch() {
+async function Areas() {
   let areaShowDiv = $(".area-show-div");
   let areabox = ``;
   let meals = await searchMealsFetch(
@@ -227,9 +240,9 @@ async function areaMealsFetch() {
     "https://www.themealdb.com/api/json/v1/1/filter.php?a="
   );
 }
-areaMealsFetch();
+// areaMealsFetch();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ingredients <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
-async function ingredientsMealsFetch() {
+async function Ingredients() {
   let ingredientsShowDiv = $(".ingredients-show-div");
   let ingredientsbox = ``;
   let meals = await searchMealsFetch(
@@ -265,7 +278,7 @@ async function ingredientsMealsFetch() {
     "https://www.themealdb.com/api/json/v1/1/filter.php?i="
   );
 }
-ingredientsMealsFetch();
+// ingredientsMealsFetch();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Search <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 let searchbox = ``;
 let mealId;
@@ -274,17 +287,15 @@ let sercahedMeals;
 searchName.keyup(async function (e) {
   searchbox = ``;
   let apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchName.val()}`;
-  console.log("hiiiiiii");
 
   (await searchMealsFetch(apiUrl))
     ? displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
-    : console.log(await searchMealsFetch(apiUrl));
+    : await searchMealsFetch(apiUrl);
 
   searchShowDiv.html(
     displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
   );
   sercahedMeals = $(".meal");
-  console.log(sercahedMeals);
 
   sercahedMeals.click(async function () {
     mealId = this.id;
@@ -297,17 +308,15 @@ searchName.keyup(async function (e) {
 searchletter.keyup(async function (e) {
   searchbox = ``;
   let apiUrl = `https://www.themealdb.com/api/json/v1/1/search.php?f=${searchletter.val()}`;
-  console.log("hiiiiiii");
 
   (await searchMealsFetch(apiUrl))
     ? displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
-    : console.log(await searchMealsFetch(apiUrl));
+    : await searchMealsFetch(apiUrl);
 
   searchShowDiv.html(
     displaySearchResults(await searchMealsFetch(apiUrl), searchbox)
   );
   sercahedMeals = $(".meal");
-  console.log(sercahedMeals);
 
   sercahedMeals.click(async function () {
     mealId = this.id;
@@ -319,11 +328,22 @@ searchletter.keyup(async function (e) {
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> automation functions <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 async function searchMealsFetch(apiUrl) {
   $(".loading-layer").removeClass("d-none");
-  const searchApiConn = await fetch(apiUrl);
-  const apiResponse = await searchApiConn.json();
-  const { meals } = apiResponse;
-  $(".loading-layer").addClass("d-none");
-  return meals;
+  let count = 5;
+  while (count > 0) {
+    try {
+      const searchApiConn = await fetch(apiUrl);
+      const apiResponse = await searchApiConn.json();
+      const { meals } = apiResponse;
+      $(".loading-layer").addClass("d-none");
+      return meals;
+    } catch (error) {
+      $(".error").html(
+        `Sorry faild to get your data, we are trying agian in ${count}`
+      );
+    }
+    count -= 1;
+  }
+  $(".error").html(`Faild! Please reload the page`);
 }
 function displaySearchResults(apiResp, displayBox) {
   displayBox = ``;
@@ -394,35 +414,43 @@ function displayDetais(apiResp) {
 }
 async function connectDetailsApi(id) {
   $(".loading-layer").removeClass("d-none");
+  let count = 5;
+  while (count > 0) {
+    try {
+      const mealDeatilsApiConn = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+      );
+      const apiDetailsResponse = await mealDeatilsApiConn.json();
+      const { meals } = apiDetailsResponse;
+      $(".loading-layer").addClass("d-none");
 
-  const mealDeatilsApiConn = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-  );
-  const apiDetailsResponse = await mealDeatilsApiConn.json();
-  const { meals } = apiDetailsResponse;
-  $(".loading-layer").addClass("d-none");
-
-  return meals[0];
+      return meals[0];
+    } catch (error) {
+      $(".error").html(
+        `Sorry faild to get your data, we are trying agian in ${count}`
+      );
+    }
+    count -= 1;
+  }
+  $(".error").html(`Faild! Please reload the page`);
 }
 function displayDetailsOfDetails(currentDiv, apiBase) {
   let showedMeals = $(`${currentDiv}`);
-
   showedMeals.click(async function () {
+    $(".loading-layer").removeClass("d-none");
     let ingredientsBoxChoice = ``;
     let ingredientsName = this.id;
-    console.log(ingredientsName);
     let apiUrl = `${apiBase}${ingredientsName}`;
-    displaySearchResults(await searchMealsFetch(apiUrl), ingredientsBoxChoice);
+    // displaySearchResults(await searchMealsFetch(apiUrl), ingredientsBoxChoice);
     searchShowDiv.html(
       displaySearchResults(await searchMealsFetch(apiUrl), ingredientsBoxChoice)
     );
     $(".active-section").removeClass("active-section");
     $(".Search").addClass("active-section");
     $(".search-div-row").addClass("d-none");
+    $(".loading-layer").addClass("d-none");
 
     let sercahedMeals = $(".meal");
-    console.log(sercahedMeals);
-
     sercahedMeals.click(async function () {
       mealId = this.id;
       displayDetais(await connectDetailsApi(mealId));

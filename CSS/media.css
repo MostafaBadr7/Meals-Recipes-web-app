@@ -17,6 +17,15 @@
   .x-icon {
     margin: 0 0 20px !important;
   }
+  .Loading-slogan {
+    font-size: 17px !important;
+  }
+  .error {
+    font-size: 12px !important;
+  }
+  .Loading-slogan-div {
+    flex-direction: column !important;
+  }
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Media 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
