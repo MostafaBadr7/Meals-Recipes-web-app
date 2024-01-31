@@ -223,7 +223,7 @@ async function Categories() {
       return true;
     } catch (error) {
       $(".error").html(
-        `Sorry faild to get your data, we are trying agian in ${count}`
+        `Sorry faild to get your data, we are trying again within ${count}`
       );
     }
     count -= 1;
@@ -351,7 +351,7 @@ async function searchMealsFetch(apiUrl) {
       return meals;
     } catch (error) {
       $(".error").html(
-        `Sorry faild to get your data, we are trying agian in ${count}`
+        `Sorry faild to get your data, we are trying again within ${count}`
       );
     }
     count -= 1;
@@ -440,7 +440,7 @@ async function connectDetailsApi(id) {
       return meals[0];
     } catch (error) {
       $(".error").html(
-        `Sorry faild to get your data, we are trying agian in ${count}`
+        `Sorry faild to get your data, we are trying again within ${count}`
       );
     }
     count -= 1;
