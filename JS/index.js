@@ -184,16 +184,18 @@ setInterval(() => {
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Categories <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 async function Categories() {
   $(".loading-layer").removeClass("d-none");
-
-  let catShowDiv = $(".categories-show-div");
-  let catbox = ``;
-  const catApiConn = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/categories.php"
-  );
-  const apiResponse = await catApiConn.json();
-  const { categories } = apiResponse;
-  for (let i = 0; i < categories.length; i++) {
-    catbox += `
+  let count = 5;
+  while (count > 0) {
+    try {
+      let catShowDiv = $(".categories-show-div");
+      let catbox = ``;
+      const catApiConn = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/categories.php"
+      );
+      const apiResponse = await catApiConn.json();
+      const { categories } = apiResponse;
+      for (let i = 0; i < categories.length; i++) {
+        catbox += `
   <div id="${categories[i].strCategory}" class="meal cats col-md-3 col-sm-8 m-sm-auto m-md-0  overflow-hidden">
             <div class="overflow-hidden p-0 position-relative rounded-4">
               <img
@@ -210,13 +212,23 @@ async function Categories() {
             </div>
           </div>
   `;
+      }
+      catShowDiv.html(catbox);
+      $(".loading-layer").addClass("d-none");
+      displayDetailsOfDetails(
+        ".cats",
+        "https://www.themealdb.com/api/json/v1/1/filter.php?c="
+      );
+      $(".error").html(``);
+      return true;
+    } catch (error) {
+      $(".error").html(
+        `Sorry faild to get your data, we are trying agian in ${count}`
+      );
+    }
+    count -= 1;
   }
-  catShowDiv.html(catbox);
-  $(".loading-layer").addClass("d-none");
-  displayDetailsOfDetails(
-    ".cats",
-    "https://www.themealdb.com/api/json/v1/1/filter.php?c="
-  );
+  $(".error").html(`Faild! Please reload the page`);
 }
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Areas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
@@ -335,6 +347,7 @@ async function searchMealsFetch(apiUrl) {
       const apiResponse = await searchApiConn.json();
       const { meals } = apiResponse;
       $(".loading-layer").addClass("d-none");
+      $(".error").html(``);
       return meals;
     } catch (error) {
       $(".error").html(
@@ -423,7 +436,7 @@ async function connectDetailsApi(id) {
       const apiDetailsResponse = await mealDeatilsApiConn.json();
       const { meals } = apiDetailsResponse;
       $(".loading-layer").addClass("d-none");
-
+      $(".error").html(``);
       return meals[0];
     } catch (error) {
       $(".error").html(
